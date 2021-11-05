@@ -7,7 +7,20 @@ Object detection is a key technology behind advanced driver assistance systems (
 
 ![Using object detection to identify and locate vehicles](https://www.mathworks.com/discovery/object-detection/_jcr_content/mainParsys3/discoverysubsection/mainParsys3/image.adapt.full.medium.jpg/1630396980057.jpg)
 
+## How It Works
 
+### Object Detection Using Deep Learning
+
+You can use a variety of techniques to perform object detection. Popular deep learning–based approaches using [convolutional neural networks](https://www.mathworks.com/discovery/convolutional-neural-network-matlab.html) (CNNs), such as R-CNN and YOLO v2, automatically learn to detect objects within images.
+
+You can choose from two key approaches to get started with object detection using deep learning:
+
+- **Create and train a custom object detector.** To train a custom object detector from scratch, you need to design a network architecture to learn the features for the objects of interest. You also need to compile a very large set of labeled data to train the CNN. The results of a custom object detector can be remarkable. That said, you need to manually set up the layers and weights in the CNN, which requires a lot of time and training data.
+- **Use a pretrained object detector.** Many object detection workflows using deep learning leverage [transfer learning](https://blogs.mathworks.com/pick/2017/02/24/deep-learning-transfer-learning-in-10-lines-of-matlab-code/), an approach that enables you to start with a pretrained network and then fine-tune it for your application. This method can provide faster results because the object detectors have already been trained on thousands, or even millions, of images.
+
+![Detecting a stop sign using a pretrained R-CNN.](https://www.mathworks.com/discovery/object-detection/_jcr_content/mainParsys3/discoverysubsection_/mainParsys3/image_copy.adapt.full.medium.jpg/1630396980251.jpg)
+
+Detecting a stop sign using a pretrained R-CNN. 
 
 Some time ago, I was exploring the exciting world of **convolutional neural networks** and wondered how can we use them for **image classification.**  Beside simple image classification, there’s no shortage of fascinating problems in computer vision, with **object detection**being one of the most interesting. Most commonly it’s associated with self driving cars where systems blend computer vision, LIDAR and other technologies to generate a multidimensional representation of road with all its participants. On the other hand object detection is used in video surveillance.
 
