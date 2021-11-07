@@ -61,9 +61,9 @@ There are a few different algorithms for object detection and they can be split 
 
    Before we go into YOLOs details we have to know what we are going to predict. Our task is to predict a class of an object and the bounding box specifying object location. Each bounding box can be described using four descriptors:
 
-   1. center of a bounding box (**b****x****b****y**)
-   2. width (**b****w**)
-   3. height (**b****h**)
+   1. center of a bounding box (**bx**,**by**)
+   2. width (**bw**)
+   3. height (**bh**)
    4. value **c** is corresponding to a class of an object (f.e. car, traffic lights,…).
 
    We’ve got also one more predicted value pc which is a probability that there is an object in the bounding box, I will explain in a moment why do we need this.
