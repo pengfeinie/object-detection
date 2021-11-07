@@ -23,7 +23,7 @@ The initial stage of two-stage networks, such as [R-CNN and its variants](https:
 
 ### R-CNN
 
-The R-CNN detector [[2\]](https://www.mathworks.com/help/vision/ug/getting-started-with-r-cnn-fast-r-cnn-and-faster-r-cnn.html#mw_a9cdd2b3-b910-4d3d-90db-b485b415fd9b) first generates region proposals using an algorithm such as Edge Boxes[[1\]](https://www.mathworks.com/help/vision/ug/getting-started-with-r-cnn-fast-r-cnn-and-faster-r-cnn.html#mw_cfbce1ef-74b2-46dd-814f-a0f985c96301). The proposal regions are cropped out of the image and resized. Then, the CNN classifies the cropped and resized regions. Finally, the region proposal bounding boxes are refined by a support vector machine (SVM) that is trained using CNN features.
+[R-CNN](https://arxiv.org/abs/1703.06870 ) The R-CNN detector [[2\]](https://www.mathworks.com/help/vision/ug/getting-started-with-r-cnn-fast-r-cnn-and-faster-r-cnn.html#mw_a9cdd2b3-b910-4d3d-90db-b485b415fd9b) first generates region proposals using an algorithm such as Edge Boxes[[1\]](https://www.mathworks.com/help/vision/ug/getting-started-with-r-cnn-fast-r-cnn-and-faster-r-cnn.html#mw_cfbce1ef-74b2-46dd-814f-a0f985c96301). The proposal regions are cropped out of the image and resized. Then, the CNN classifies the cropped and resized regions. Finally, the region proposal bounding boxes are refined by a support vector machine (SVM) that is trained using CNN features.
 
 Use the [`trainRCNNObjectDetector`](https://www.mathworks.com/help/vision/ref/trainrcnnobjectdetector.html) function to train an R-CNN object detector. The function returns an [`rcnnObjectDetector`](https://www.mathworks.com/help/vision/ref/rcnnobjectdetector.html) object that detects objects in an image.
 
@@ -31,7 +31,7 @@ Use the [`trainRCNNObjectDetector`](https://www.mathworks.com/help/vision/ref/tr
 
 ### Fast R-CNN
 
-As in the R-CNN detector , the Fast R-CNN[[3\]](https://www.mathworks.com/help/vision/ug/getting-started-with-r-cnn-fast-r-cnn-and-faster-r-cnn.html#mw_7805faa1-3821-45ff-8e7d-bda6ae35a633) detector also uses an algorithm like Edge Boxes to generate region proposals. Unlike the R-CNN detector, which crops and resizes region proposals, the Fast R-CNN detector processes the entire image. Whereas an R-CNN detector must classify each region, Fast R-CNN pools CNN features corresponding to each region proposal. Fast R-CNN is more efficient than R-CNN, because in the Fast R-CNN detector, the computations for overlapping regions are shared.
+[Fast R-CNN](https://arxiv.org/abs/1504.08083)  As in the R-CNN detector , the Fast R-CNN[[3\]](https://www.mathworks.com/help/vision/ug/getting-started-with-r-cnn-fast-r-cnn-and-faster-r-cnn.html#mw_7805faa1-3821-45ff-8e7d-bda6ae35a633) detector also uses an algorithm like Edge Boxes to generate region proposals. Unlike the R-CNN detector, which crops and resizes region proposals, the Fast R-CNN detector processes the entire image. Whereas an R-CNN detector must classify each region, Fast R-CNN pools CNN features corresponding to each region proposal. Fast R-CNN is more efficient than R-CNN, because in the Fast R-CNN detector, the computations for overlapping regions are shared.
 
 Use the [`trainFastRCNNObjectDetector`](https://www.mathworks.com/help/vision/ref/trainfastrcnnobjectdetector.html) function to train a Fast R-CNN object detector. The function returns a [`fastRCNNObjectDetector`](https://www.mathworks.com/help/vision/ref/fastrcnnobjectdetector.html) that detects objects from an image.
 
@@ -39,7 +39,7 @@ Use the [`trainFastRCNNObjectDetector`](https://www.mathworks.com/help/vision/re
 
 ### Faster R-CNN
 
-The Faster R-CNN[[4\]](https://www.mathworks.com/help/vision/ug/getting-started-with-r-cnn-fast-r-cnn-and-faster-r-cnn.html#mw_25d18973-df6c-48ef-aaa9-31a4ec9e6705) detector adds a region proposal network (RPN) to generate region proposals directly in the network instead of using an external algorithm like Edge Boxes. The RPN uses [Anchor Boxes for Object Detection](https://www.mathworks.com/help/vision/ug/anchor-boxes-for-object-detection.html). Generating region proposals in the network is faster and better tuned to your data.
+[Faster R-CNN](https://arxiv.org/abs/1506.01497) The Faster R-CNN[[4\]](https://www.mathworks.com/help/vision/ug/getting-started-with-r-cnn-fast-r-cnn-and-faster-r-cnn.html#mw_25d18973-df6c-48ef-aaa9-31a4ec9e6705) detector adds a region proposal network (RPN) to generate region proposals directly in the network instead of using an external algorithm like Edge Boxes. The RPN uses [Anchor Boxes for Object Detection](https://www.mathworks.com/help/vision/ug/anchor-boxes-for-object-detection.html). Generating region proposals in the network is faster and better tuned to your data.
 
 Use the [`trainFasterRCNNObjectDetector`](https://www.mathworks.com/help/vision/ref/trainfasterrcnnobjectdetector.html) function to train a Faster R-CNN object detector. The function returns a [`fasterRCNNObjectDetector`](https://www.mathworks.com/help/vision/ref/fasterrcnnobjectdetector.html) that detects objects from an image.
 
