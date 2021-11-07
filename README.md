@@ -95,11 +95,15 @@ You can choose from two key approaches to get started with object detection usin
 
 ![Detecting a stop sign using a pretrained R-CNN.](https://pengfeinie.github.io/images/1630396980251.jpg)
 
+### Object Detection Using Machine Learning
 
+Machine learning techniques are also commonly used for object detection, and they offer different approaches than deep learning. Common machine learning techniques include:
 
+- Aggregate channel features (ACF)
+- SVM classification using histograms of oriented gradient (HOG) features
+- The Viola-Jones algorithm for human face or upper body detection
 
-
-
+Similar to deep learning–based approaches, you can choose to start with a pretrained object detector or create a custom object detector to suit your application. You will need to manually select the identifying features for an object when using machine learning, compared with automatic feature selection in a deep learning–based workflow.
 
 ## References
 
@@ -112,3 +116,5 @@ You can choose from two key approaches to get started with object detection usin
 7. [https://arxiv.org/pdf/1905.05055.pdf](https://arxiv.org/pdf/1905.05055.pdf)
 8. [https://pengfeinie.github.io/files/1905.05055.pdf](https://pengfeinie.github.io/files/1905.05055.pdf) 
 9. [https://link.springer.com/article/10.1007/s11263-019-01247-4](https://link.springer.com/article/10.1007/s11263-019-01247-4)
+10. [https://machinelearningmastery.com/object-recognition-with-deep-learning/](https://machinelearningmastery.com/object-recognition-with-deep-learning/)
+11. [https://viso.ai/deep-learning/object-detection/](https://viso.ai/deep-learning/object-detection/)
