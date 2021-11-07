@@ -1,9 +1,9 @@
-# object-detection
+# Object Detection
 Object detection is a computer vision technique for locating instances of objects in images or videos. Object detection algorithms typically leverage [machine learning](https://www.mathworks.com/discovery/machine-learning.html) or [deep learning](https://www.mathworks.com/discovery/deep-learning.html) to produce meaningful results. When humans look at images or video, we can recognize and locate objects of interest within a matter of moments. The goal of object detection is to replicate this intelligence using a computer.
 
 ## Why Object Detection Matters
 
-Object detection is a key technology behind advanced driver assistance systems (ADAS) that enable cars to detect driving lanes or perform pedestrian detection to improve road safety. Object detection is also useful in applications such as video surveillance or image retrieval systems. Using object detection to identify and locate vehicles.
+Object detection is a key technology behind advanced driver assistance systems (ADAS) that enable cars to detect driving lanes or perform pedestrian detection to improve road safety. Using object detection to identify and locate vehicles.
 
 ![Using object detection to identify and locate vehicles](https://www.mathworks.com/discovery/object-detection/_jcr_content/mainParsys3/discoverysubsection/mainParsys3/image.adapt.full.medium.jpg/1630396980057.jpg)
 
@@ -36,6 +36,21 @@ There are a few different algorithms for object detection and they can be split 
 
 2. Algorithms based on regression – instead of selecting interesting parts of an image, we’re predicting classes and bounding boxes for the whole image **in one run of the algorithm**. Most known example of this type of algorithms is **YOLO (You only look once)** commonly used for real-time object detection.
 
+   
+   
+   Before we go into YOLOs details we have to know what we are going to predict. Our task is to predict a class of an object and the bounding box specifying object location. Each bounding box can be described using four descriptors:
+   
+   1. center of a bounding box (**b****x****b****y**)
+   2. width (**b****w**)
+   3. height (**b****h**)
+   4. value **c** is corresponding to a class of an object (f.e. car, traffic lights,…).
+   
+   We’ve got also one more predicted value pc which is a probability that there is an object in the bounding box, I will explain in a moment why do we need this.
+   
+   ![img](https://appsilondatascience.com/assets/uploads/2018/08/bbox-1.png)
+   
+   
+   
    
 
 https://www.mathworks.com/discovery/object-detection.html
