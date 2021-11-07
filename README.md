@@ -13,7 +13,9 @@ Object detection is a key technology behind advanced driver assistance systems (
 
 [https://arxiv.org/pdf/1905.05055.pdf](https://arxiv.org/pdf/1905.05055.pdf) </br>
 
-[https://pengfeinie.github.io/files/1905.05055.pdf](https://pengfeinie.github.io/files/1905.05055.pdf)
+[https://pengfeinie.github.io/files/1905.05055.pdf](https://pengfeinie.github.io/files/1905.05055.pdf) </br>
+
+[https://link.springer.com/article/10.1007/s11263-019-01247-4](https://link.springer.com/article/10.1007/s11263-019-01247-4)
 
 ## Two-Stage Networks
 
