@@ -70,6 +70,12 @@ There are a few different algorithms for object detection and they can be split 
 
    ![img](https://pengfeinie.github.io/images/bbox-1.png)
 
+YOLO uses a single bounding box regression to predict the height, width, center, and class of objects. In the image above, represents the probability of an object appearing in the bounding box.
+
+Download: https://pjreddie.com/media/files/yolov3.weights and move to under cfg folder.https://pjreddie.com/darknet/yolo/
+
+
+
 ### SSD (Single Shot Multibox Detector)
 
 The [SSD architecture](https://arxiv.org/pdf/1512.02325.pdf) was published in 2016 by researchers from Google. It presents an object detection model using a single deep neural network combining regional proposals and feature extraction.
