@@ -88,6 +88,22 @@ We only predict one set of class probabilities per grid cell, regardless of the 
 
 *The PASCAL Visual Object Classes (VOC) 2012 dataset contains 20 object categories including vehicles, household, animals, and other: aeroplane, bicycle, boat, bus, car, motorbike, train, bottle, chair, dining table, potted plant, sofa, TV/monitor, bird, cat, cow, dog, horse, sheep, and person. Each image in this dataset has pixel-level segmentation annotations, bounding box annotations, and object class annotations. This dataset has been widely used as a benchmark for object detection, semantic segmentation, and classification tasks. The PASCAL VOC dataset is split into three subsets: 1,464 images for training, 1,449 images for validation and a private testing set.*
 
+
+
+As I said earlier, the network architecture is very simple, it's just a backbone with two fully connected layers. Let's blow up that last layer in a bit more detail. I'm going to refer to it as the *output tensor* to make it easier to refer to. *The output tensor from YOLO v1.*
+
+![img](E:\npfsourcecode\java\sourcecode\pengfeinie.github.io\images\output_tensor.png)
+
+The first thing you might notice is that I've been calling it a fully connected layer, but it sure doesn't look like one. Don't let the 3D shape fool you, it *is* fully connected, it is *not* produced by a convolution, they just reshape it because it's easier to interpret in 3D. If implemented in PyTorch, you can imagine it being coded as a fully connected layer that is then reshaped into a 3D tensor. Alternatively, you can imagine unrolling the 3D tensor into one long vector of length `1470 (7x7x30)`. However you imagine it, it is fully connected, every output neuron is connected to every neuron in the 4096-vector before it.
+
+So why reshape it into 3D? What do all those outputs mean? Why do those outputs make it an object detector? I'll start with the reason that it's `7x7`. To clarify my notation and make it easier to talk about, I will refer to a *cell*, and what I mean by that is a single position in the `7x7` grid of the output tensor. Therefore each cell is a single vector of length 30, I have highlighted one such cell in the diagram.
+
+YOLO breaks the image up into a grid of size `7x7`. Let me copy in the image from the paper. For the moment, focus on the left part of the diagram, with the `SxS` grid.
+
+
+
+
+
 Download: https://pjreddie.com/media/files/yolov3.weights and move to under cfg folder.https://pjreddie.com/darknet/yolo/
 
 
@@ -141,3 +157,4 @@ Similar to deep learning–based approaches, you can choose to start with a pret
 10. [https://machinelearningmastery.com/object-recognition-with-deep-learning/](https://machinelearningmastery.com/object-recognition-with-deep-learning/)
 11. [https://viso.ai/deep-learning/object-detection/](https://viso.ai/deep-learning/object-detection/)
 12. https://paperswithcode.com/dataset/pascal-voc
+13. https://www.harrysprojects.com/articles/yolov1.html
