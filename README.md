@@ -80,15 +80,21 @@ https://scholar.google.com/
 
 #### YOLO v1
 
-We only predict one set of class probabilities per grid cell, regardless of the number of boxes B. 
+##### The Architecture
 
-**The Model**. Our system models detection as a regression problem. It divides the image into an S × S grid and for each grid cell predicts B bounding boxes, confidence for those boxes, and C class probabilities. These predictions are encoded as an S × S × (B ∗ 5 + C) tensor. For evaluating YOLO on [PASCAL VOC](https://paperswithcode.com/dataset/pascal-voc), we use S = 7, B = 2. PASCAL VOC has 20 labelled classes so C = 20. Our final prediction is a 7 × 7 × 30 tensor.
+![image-20211109160501058](E:\npfsourcecode\java\sourcecode\pengfeinie.github.io\images\image-20211109160501058.png)
+
+**The Model**. Our system models detection as a regression problem. It divides the image into an S × S grid and for each grid cell predicts B bounding boxes, confidence for those boxes, and C class probabilities. These predictions are encoded as an S × S × (B ∗ 5 + C) tensor. For evaluating YOLO on [PASCAL VOC](https://paperswithcode.com/dataset/pascal-voc), we use S = 7, B = 2. PASCAL VOC has 20 labelled classes so C = 20. Our final prediction is a 7 × 7 × 30 tensor. We only predict one set of class probabilities per grid cell, regardless of the number of boxes B. 
 
 *The PASCAL Visual Object Classes (VOC) 2012 dataset contains 20 object categories including vehicles, household, animals, and other: aeroplane, bicycle, boat, bus, car, motorbike, train, bottle, chair, dining table, potted plant, sofa, TV/monitor, bird, cat, cow, dog, horse, sheep, and person. Each image in this dataset has pixel-level segmentation annotations, bounding box annotations, and object class annotations. This dataset has been widely used as a benchmark for object detection, semantic segmentation, and classification tasks. The PASCAL VOC dataset is split into three subsets: 1,464 images for training, 1,449 images for validation and a private testing set.*
 
+The architecture of YOLO v1 is not complicated, in fact it's just a convolutional backbone with two fully connected layers, much like an image classification network architecture. The clever part of YOLO (the part that makes it an object detector) is in the interpretation of the outputs of those fully connected layers. However, the concepts underlying that interpretation are complex, and can be difficult to grasp on a first reading. As I started writing about YOLO, I found myself repeating lots of ideas that I've already written about in other posts, and I don't want to repeat all that here. Therefore I'm going to refer you to those posts that explain in much more depth the concepts that I think are relevant.
 
+Firstly, I recommend that you understand what anchors are, which I explain in depth in my post on [Faster R-CNN](https://www.harrysprojects.com/articles/fasterrcnn.html). YOLO doesn't technically use anchors, but it uses a similar idea. If you understand anchors then the discussion of the representation presented shortly will feel familiar. Note that there are differences between what YOLO does and the anchors defined in the RPN, so I'll make sure to be clear on those differences at the end. Secondly, it would benefit you to understand what box parameterisation is, in which I go into detail in my post on [Fast R-CNN](https://www.harrysprojects.com/articles/fastrcnn.html). You don't need to understand the specifics of how Fast R-CNN does parameterisation because YOLO does it differently, but it is important that you understand that when an object detector predicts a bounding box, you must always ask, *with respect to what?* If you are familiar with those concepts, then let's continue.
 
-As I said earlier, the network architecture is very simple, it's just a backbone with two fully connected layers. Let's blow up that last layer in a bit more detail. I'm going to refer to it as the *output tensor* to make it easier to refer to. *The output tensor from YOLO v1.*
+Next, a quick note on the backbone. The authors designed their own convolutional backbone which was inspired by GoogLeNet. But I just want to point that it's just a feature extractor, and you could swap in any backbone you like, and as long as you made the size of the fully connected layers line up, it would all work fine. I won't dwell on the backbone any longer, the object detection is all done in the head. See my post on [Fast R-CNN](https://www.harrysprojects.com/articles/fastrcnn.html) for more detail on the difference between network backbones and heads.
+
+As I said earlier, the network architecture is very simple, it's just a backbone with two fully connected layers. Let's blow up that last layer in a bit more detail. I'm going to refer to it as the *output tensor* to make it easier to refer to.
 
 ![img](https://pengfeinie.github.io/images/output_tensor.png)
 
@@ -118,7 +124,7 @@ Download: https://pjreddie.com/media/files/yolov3.weights and move to under cfg 
 
 The Yolo was one of the first deep, one-stage detectors and since the first paper was published in **CVPR 2016**, each year has brought with it a new Yolo paper or tech report. We begin with Yolo v1 [1], but since we are primarily interested in analyzing loss functions, all we really need to know about the Yolo v1 CNN **(Figure 2a)**, is that is takes an RGB image (**448×448×3**) and returns a cube (**7×7×30**), interpreted in **(Figure 2b)**.
 
-![YOLO](https://pengfeinie.github.io/images/00adc0adec6423a45a0706a4ce2dc01d.png)  
+![](https://pengfeinie.github.io/images/00adc0adec6423a45a0706a4ce2dc01d.png)
 
 
 
