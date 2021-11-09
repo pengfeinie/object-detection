@@ -29,7 +29,8 @@ print(class_numbers)
 # With this technique we exclude some of bounding boxes if their
 # corresponding confidences are low or there is another
 # bounding box for this region with higher confidence
-yolov3_common.nonMaximumSuppression(bounding_boxes, confidences, p_min, threshold, colours, class_numbers, labels, image)
+yolov3_common.nonMaximumSuppression(bounding_boxes, confidences, p_min, threshold, colours,
+                                    class_numbers, labels, image)
 
 # WINDOW_NORMAL gives window as resizable.
 cv2.namedWindow('Detections', cv2.WINDOW_NORMAL)
