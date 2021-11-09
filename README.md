@@ -159,17 +159,17 @@ Similar to deep learning–based approaches, you can choose to start with a pret
 
 ## References
 
-1. [https://www.mathworks.com/discovery/object-detection.html](https://www.mathworks.com/discovery/object-detection.html)
-2. [https://paperswithcode.com/task/object-detection](https://paperswithcode.com/task/object-detection)
-3. [https://www.datacamp.com/community/tutorials/object-detection-guide](https://www.datacamp.com/community/tutorials/object-detection-guide)
-4. [https://www.kdnuggets.com/2018/09/object-detection-image-classification-yolo.html](https://www.kdnuggets.com/2018/09/object-detection-image-classification-yolo.html)
-5. [https://www.einfochips.com/blog/understanding-object-localization-with-deep-learning/](https://www.einfochips.com/blog/understanding-object-localization-with-deep-learning/)
-6. [Object Detection in 20 Years: A Survey](https://www.semanticscholar.org/paper/Object-Detection-in-20-Years%3A-A-Survey-Zou-Shi/bd040c9f76d3b0b77e2065089b8d344c9b5d83d6#extracted)  
-7. [https://arxiv.org/pdf/1905.05055.pdf](https://arxiv.org/pdf/1905.05055.pdf)
-8. [https://pengfeinie.github.io/files/1905.05055.pdf](https://pengfeinie.github.io/files/1905.05055.pdf) 
-9. [https://link.springer.com/article/10.1007/s11263-019-01247-4](https://link.springer.com/article/10.1007/s11263-019-01247-4)
-10. [https://machinelearningmastery.com/object-recognition-with-deep-learning/](https://machinelearningmastery.com/object-recognition-with-deep-learning/)
-11. [https://viso.ai/deep-learning/object-detection/](https://viso.ai/deep-learning/object-detection/)
-12. https://paperswithcode.com/dataset/pascal-voc
-13. https://www.harrysprojects.com/articles/yolov1.html
-14. https://medium.com/oracledevs/final-layers-and-loss-functions-of-single-stage-detectors-part-1-4abbfa9aa71c
+- [https://www.mathworks.com/discovery/object-detection.html](https://www.mathworks.com/discovery/object-detection.html)
+- [https://paperswithcode.com/task/object-detection](https://paperswithcode.com/task/object-detection)
+- [https://www.datacamp.com/community/tutorials/object-detection-guide](https://www.datacamp.com/community/tutorials/object-detection-guide)
+- [https://www.kdnuggets.com/2018/09/object-detection-image-classification-yolo.html](https://www.kdnuggets.com/2018/09/object-detection-image-classification-yolo.html)
+- [https://www.einfochips.com/blog/understanding-object-localization-with-deep-learning/](https://www.einfochips.com/blog/understanding-object-localization-with-deep-learning/)
+- [Object Detection in 20 Years: A Survey](https://www.semanticscholar.org/paper/Object-Detection-in-20-Years%3A-A-Survey-Zou-Shi/bd040c9f76d3b0b77e2065089b8d344c9b5d83d6#extracted)  
+- [https://arxiv.org/pdf/1905.05055.pdf](https://arxiv.org/pdf/1905.05055.pdf)
+- [https://pengfeinie.github.io/files/1905.05055.pdf](https://pengfeinie.github.io/files/1905.05055.pdf) 
+- [https://link.springer.com/article/10.1007/s11263-019-01247-4](https://link.springer.com/article/10.1007/s11263-019-01247-4)
+- [https://machinelearningmastery.com/object-recognition-with-deep-learning/](https://machinelearningmastery.com/object-recognition-with-deep-learning/)
+- [https://viso.ai/deep-learning/object-detection/](https://viso.ai/deep-learning/object-detection/)
+- https://paperswithcode.com/dataset/pascal-voc
+- https://www.harrysprojects.com/articles/yolov1.html
+- https://medium.com/oracledevs/final-layers-and-loss-functions-of-single-stage-detectors-part-1-4abbfa9aa71c
