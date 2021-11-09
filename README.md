@@ -82,7 +82,7 @@ https://scholar.google.com/
 
 ##### The Architecture
 
-![image-20211109160501058](E:\npfsourcecode\java\sourcecode\pengfeinie.github.io\images\image-20211109160501058.png)
+![image-20211109160501058](https://pengfeinie.github.io/images/image-20211109160501058.png)
 
 **The Model**. Our system models detection as a regression problem. It divides the image into an S × S grid and for each grid cell predicts B bounding boxes, confidence for those boxes, and C class probabilities. These predictions are encoded as an S × S × (B ∗ 5 + C) tensor. For evaluating YOLO on [PASCAL VOC](https://paperswithcode.com/dataset/pascal-voc), we use S = 7, B = 2. PASCAL VOC has 20 labelled classes so C = 20. Our final prediction is a 7 × 7 × 30 tensor. We only predict one set of class probabilities per grid cell, regardless of the number of boxes B. 
 
