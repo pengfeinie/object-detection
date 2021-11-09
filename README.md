@@ -72,6 +72,40 @@ There are a few different algorithms for object detection and they can be split 
 
 YOLO uses a single bounding box regression to predict the height, width, center, and class of objects. In the image above, represents the probability of an object appearing in the bounding box.
 
+
+
+https://scholar.google.com/
+
+![image-20211109124400546](https://pengfeinie.github.io/images/image-20211109124400546.png)
+
+#### YOLO v1
+
+We only predict one set of class probabilities per grid cell, regardless of the number of boxes B. The images as below come from [YOLO v1 Paper](https://arxiv.org/abs/1506.02640).
+
+![image-20211109125322361](https://pengfeinie.github.io/images/image-20211109125322361.png)
+
+**The Model**. Our system models detection as a regression problem. It divides the image into an S × S grid and for each grid cell predicts B bounding boxes, confidence for those boxes, and C class probabilities. These predictions are encoded as an S × S × (B ∗ 5 + C) tensor. For evaluating YOLO on PASCAL VOC, we use S = 7, B = 2. PASCAL VOC has 20 labelled classes so C = 20. Our final prediction is a 7 × 7 × 30 tensor.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Download: https://pjreddie.com/media/files/yolov3.weights and move to under cfg folder.https://pjreddie.com/darknet/yolo/
 
 
