@@ -108,7 +108,17 @@ In order to predict a single box, the network must output a number of things. Fi
 
 Secondly, YOLO also predicts a confidence score for each box which represents the probability that the box contains an object. Lastly, YOLO predicts a class, which is represented by a vector of `C` values, and the predicted class is the one with the highest value. Now, here's the catch. YOLO does *not* predict a class for every box, it predicts a class *for each cell*. But each cell is associated with two boxes, so those boxes will have the same predicted class, even though they may have different shapes and positions. Let's tie all that together visually, let me copy down my diagram again.
 
+![img](https://pengfeinie.github.io/images/output_tensor.png)
+
+The first five values encode the location and confidence of the first box, the next five encode the location and confidence of the next box, and the final 20 encode the 20 classes (because Pascal VOC has 20 classes). In total, the size of the vector is `5xB + C` where `B` is the number of boxes, and `C` is the number of classes.
+
 Download: https://pjreddie.com/media/files/yolov3.weights and move to under cfg folder.https://pjreddie.com/darknet/yolo/
+
+
+
+The Yolo was one of the first deep, one-stage detectors and since the first paper was published in **CVPR 2016**, each year has brought with it a new Yolo paper or tech report. We begin with Yolo v1 [1], but since we are primarily interested in analyzing loss functions, all we really need to know about the Yolo v1 CNN **(Figure 2a)**, is that is takes an RGB image (**448×448×3**) and returns a cube (**7×7×30**), interpreted in **(Figure 2b)**.
+
+![YOLO](https://pengfeinie.github.io/images/00adc0adec6423a45a0706a4ce2dc01d.png)  
 
 
 
@@ -162,3 +172,4 @@ Similar to deep learning–based approaches, you can choose to start with a pret
 11. [https://viso.ai/deep-learning/object-detection/](https://viso.ai/deep-learning/object-detection/)
 12. https://paperswithcode.com/dataset/pascal-voc
 13. https://www.harrysprojects.com/articles/yolov1.html
+14. https://medium.com/oracledevs/final-layers-and-loss-functions-of-single-stage-detectors-part-1-4abbfa9aa71c
