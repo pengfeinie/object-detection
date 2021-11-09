@@ -92,7 +92,7 @@ We only predict one set of class probabilities per grid cell, regardless of the 
 
 As I said earlier, the network architecture is very simple, it's just a backbone with two fully connected layers. Let's blow up that last layer in a bit more detail. I'm going to refer to it as the *output tensor* to make it easier to refer to. *The output tensor from YOLO v1.*
 
-![img](E:\npfsourcecode\java\sourcecode\pengfeinie.github.io\images\output_tensor.png)
+![img](https://pengfeinie.github.io/images/output_tensor.png)
 
 The first thing you might notice is that I've been calling it a fully connected layer, but it sure doesn't look like one. Don't let the 3D shape fool you, it *is* fully connected, it is *not* produced by a convolution, they just reshape it because it's easier to interpret in 3D. If implemented in PyTorch, you can imagine it being coded as a fully connected layer that is then reshaped into a 3D tensor. Alternatively, you can imagine unrolling the 3D tensor into one long vector of length `1470 (7x7x30)`. However you imagine it, it is fully connected, every output neuron is connected to every neuron in the 4096-vector before it.
 
