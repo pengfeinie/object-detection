@@ -78,6 +78,58 @@ https://scholar.google.com/
 
 ![image-20211109124400546](https://pengfeinie.github.io/images/image-20211109124400546.png)
 
+Before diving into YOLO, we need to go through some terms:
+
+**1-Intersect Over Union (IOU):**
+
+![img](https://pengfeinie.github.io/images/iou.png)
+
+*the above image from [source](https://amrokamal-47691.medium.com/yolo-yolov2-and-yolov3-all-you-want-to-know-7e3e92dc4899) .*
+
+IOU can be computed as Area of Intersection divided over Area of Union of two boxes, so IOU must be ≥0 and ≤1.
+
+When predicting bounding boxes, we need the find the IOU between the predicted bounding box and the ground truth box to be ~1.
+
+![img](https://pengfeinie.github.io/images/cat.jpeg)
+
+In the left image, IOU is very low, but in the right image, IOU is ~1.
+
+**2-** **Precision:**
+
+Simply we can define precision as the ratio of **true** positive(true predictions) (TP) and the total number of **predicted** positives(total predictions). The formula is given as such:
+
+![img](https://miro.medium.com/max/60/1*-Y2bLNfGDkcZ5BSPPzHBjQ.png?q=20)
+
+![img](https://miro.medium.com/max/180/1*-Y2bLNfGDkcZ5BSPPzHBjQ.png)
+
+For example, imagine we have 20 images, and we know that there are 120 cars in these 20 images.
+
+Now, let’s suppose we input these images into a model, and it detected 100 cars (here the model said: I’ve found 100 cars in these 20 images, and I’ve drawn bounding boxes around every single car of them).
+
+To calculate the precision of this model, we need to check the 100 boxes the model had drawn, and if we found that 20 of them are incorrect, then the precision will be =80/100=0.8
+
+**3-Recall:**
+
+If we look at the precision example again, we find that it doesn’t consider the total number of cars in the data (120), so if there are 1000 cars instead of 120 and the model output 100 boxes with 80 of them are correct, then the precision will be 0.8 again.
+
+To solve this, we need to define another metric, called the **Recall,** which is the ratio of **true** positive(true predictions) and the total of ground truth positives(total number of cars). The formula is given as such:
+
+![img](https://miro.medium.com/max/60/1*nx6V3Q_EqnGWzcLfW_lL-A.png?q=20)
+
+![img](https://miro.medium.com/max/198/1*nx6V3Q_EqnGWzcLfW_lL-A.png)
+
+For our example, the recall=80/120=0.667.
+
+Now we can notice that the recall measures how well we detect **all** the objects in the data.
+
+![img](https://miro.medium.com/max/350/1*kaqtNALKZujx1FGlbK11OQ.png)
+
+**4- Average Precision and Mean Average Precision(mAP):**
+
+A brief definition for the Average Precision is the **area** under the **precision-recall curve.**
+
+**AP** combines both precision and recall together. It takes a value between 0 and 1 (higher is better). To get **AP** =1 we need both the precision and recall to be equal to 1. The **mAP** is the mean of the AP calculated for all the classes.
+
 #### YOLO v1
 
 ##### The Architecture
@@ -187,3 +239,4 @@ Similar to deep learning–based approaches, you can choose to start with a pret
 - https://paperswithcode.com/dataset/pascal-voc
 - https://www.harrysprojects.com/articles/yolov1.html
 - https://medium.com/oracledevs/final-layers-and-loss-functions-of-single-stage-detectors-part-1-4abbfa9aa71c
+- https://amrokamal-47691.medium.com/yolo-yolov2-and-yolov3-all-you-want-to-know-7e3e92dc4899
