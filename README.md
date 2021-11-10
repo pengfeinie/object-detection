@@ -140,7 +140,7 @@ A brief definition for the Average Precision is the **area** under the **precisi
 
 *The PASCAL Visual Object Classes (VOC) 2012 dataset contains 20 object categories including vehicles, household, animals, and other: aeroplane, bicycle, boat, bus, car, motorbike, train, bottle, chair, dining table, potted plant, sofa, TV/monitor, bird, cat, cow, dog, horse, sheep, and person. Each image in this dataset has pixel-level segmentation annotations, bounding box annotations, and object class annotations. This dataset has been widely used as a benchmark for object detection, semantic segmentation, and classification tasks. The PASCAL VOC dataset is split into three subsets: 1,464 images for training, 1,449 images for validation and a private testing set.*
 
-For our discussion, we crop our original photo. YOLO divides the input image into an **S**×**S** grid. Each grid cell predicts only **one** object. For example, the yellow grid cell below tries to predict the “person” object whose center (the blue dot) falls inside the grid cell. Each grid cell detects only one object.
+For our discussion, we crop our original photo. YOLO divides the input image into an **S**×**S** grid. Each grid cell predicts only **one** object. For example, the yellow grid cell below tries to predict the “person” object whose center (the blue dot) falls inside the grid cell. Each grid cell detects only one object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
 ![img](https://miro.medium.com/max/700/1*6qZXYCDUkC5Bc8nRolT0Mw.jpeg)
 
@@ -160,7 +160,7 @@ For each grid cell,
 - it detects **one** object only regardless of the number of boxes B,
 - it predicts **C** **conditional class probabilities** (one per class for the likeliness of the object class).
 
-To evaluate PASCAL VOC, YOLO uses 7×7 grids (S×S), 2 boundary boxes (B) and 20 classes (C).
+To evaluate [PASCAL VOC](https://paperswithcode.com/dataset/pascal-voc), YOLO uses 7×7 grids (S×S), 2 boundary boxes (B) and 20 classes (C).
 
 ![img](https://miro.medium.com/max/700/1*OuMJUWo2rXYA-GYU63NUGw.jpeg)
 
@@ -175,6 +175,12 @@ It measures the confidence on both the classification and the **localization** (
 We may mix up those scoring and probability terms easily. Here are the mathematical definitions for your future reference.
 
 ![img](https://miro.medium.com/max/700/1*0IPktA65WxOBfP_ULQWcmw.png)
+
+
+
+
+
+
 
 The architecture of YOLO v1 is not complicated, in fact it's just a convolutional backbone with two fully connected layers, much like an image classification network architecture. The clever part of YOLO (the part that makes it an object detector) is in the interpretation of the outputs of those fully connected layers. However, the concepts underlying that interpretation are complex, and can be difficult to grasp on a first reading. As I started writing about YOLO, I found myself repeating lots of ideas that I've already written about in other posts, and I don't want to repeat all that here. Therefore I'm going to refer you to those posts that explain in much more depth the concepts that I think are relevant.
 
