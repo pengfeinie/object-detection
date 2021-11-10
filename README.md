@@ -180,29 +180,15 @@ For every grid cell, you will get two bounding boxes, which will make up for the
 
 ![](https://pengfeinie.github.io/images/yolov1_grid1.jpg)
 
-Next, we multiply all these class score with bounding box confidence and get class scores for different bounding boxes. We do this for all the grid cells. That is equal to 7 x 7 x 2 = 98.
-
 ![](https://pengfeinie.github.io/images/yolo1.gif)
 
-
+Next, we multiply all these class score with bounding box confidence and get class scores for different bounding boxes. 
 
 ![](https://pengfeinie.github.io/images/yolo1_grid.gif)
 
+We do this for all the grid cells. That is equal to 7 x 7 x 2 = 98.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![](https://pengfeinie.github.io/images/yolo1_all_grid.gif)
 
 
 
