@@ -140,6 +140,28 @@ A brief definition for the Average Precision is the **area** under the **precisi
 
 *The PASCAL Visual Object Classes (VOC) 2012 dataset contains 20 object categories including vehicles, household, animals, and other: aeroplane, bicycle, boat, bus, car, motorbike, train, bottle, chair, dining table, potted plant, sofa, TV/monitor, bird, cat, cow, dog, horse, sheep, and person. Each image in this dataset has pixel-level segmentation annotations, bounding box annotations, and object class annotations. This dataset has been widely used as a benchmark for object detection, semantic segmentation, and classification tasks. The PASCAL VOC dataset is split into three subsets: 1,464 images for training, 1,449 images for validation and a private testing set.*
 
+For each grid cell,
+
+- it predicts **B** boundary boxes and each box has one **box confidence score**,
+- it detects **one** object only regardless of the number of boxes B,
+- it predicts **C** **conditional class probabilities** (one per class for the likeliness of the object class).
+
+To evaluate PASCAL VOC, YOLO uses 7×7 grids (S×S), 2 boundary boxes (B) and 20 classes (C).
+
+![img](https://miro.medium.com/max/700/1*OuMJUWo2rXYA-GYU63NUGw.jpeg)
+
+Let’s get into more details. Each boundary box contains 5 elements: (*x, y, w, h*) and a **box confidence score**. The confidence score reflects how likely the box contains an object (**objectness**) and how accurate is the boundary box. We normalize the bounding box width *w* and height *h* by the image width and height. *x* and *y* are offsets to the corresponding cell. Hence, *x, y, w* and *h* are all between 0 and 1. Each cell has 20 conditional class probabilities. The **conditional class probability** is the probability that the detected object belongs to a particular class (one probability per category for each cell). So, YOLO’s prediction has a shape of (S, S, B×5 + C) = (7, 7, 2×5 + 20) = (7, 7, 30).
+
+The **class confidence score** for each prediction box is computed as:
+
+![img](https://miro.medium.com/max/700/1*qVL77IZyEnra4DvENayXUA.png)
+
+It measures the confidence on both the classification and the **localization** (where an object is located).
+
+We may mix up those scoring and probability terms easily. Here are the mathematical definitions for your future reference.
+
+![img](https://miro.medium.com/max/700/1*0IPktA65WxOBfP_ULQWcmw.png)
+
 The architecture of YOLO v1 is not complicated, in fact it's just a convolutional backbone with two fully connected layers, much like an image classification network architecture. The clever part of YOLO (the part that makes it an object detector) is in the interpretation of the outputs of those fully connected layers. However, the concepts underlying that interpretation are complex, and can be difficult to grasp on a first reading. As I started writing about YOLO, I found myself repeating lots of ideas that I've already written about in other posts, and I don't want to repeat all that here. Therefore I'm going to refer you to those posts that explain in much more depth the concepts that I think are relevant.
 
 Firstly, I recommend that you understand what anchors are, which I explain in depth in my post on [Faster R-CNN](https://www.harrysprojects.com/articles/fasterrcnn.html). YOLO doesn't technically use anchors, but it uses a similar idea. If you understand anchors then the discussion of the representation presented shortly will feel familiar. Note that there are differences between what YOLO does and the anchors defined in the RPN, so I'll make sure to be clear on those differences at the end. Secondly, it would benefit you to understand what box parameterisation is, in which I go into detail in my post on [Fast R-CNN](https://www.harrysprojects.com/articles/fastrcnn.html). You don't need to understand the specifics of how Fast R-CNN does parameterisation because YOLO does it differently, but it is important that you understand that when an object detector predicts a bounding box, you must always ask, *with respect to what?* If you are familiar with those concepts, then let's continue.
@@ -189,6 +211,26 @@ Next, we multiply all these class score with bounding box confidence and get cla
 We do this for all the grid cells. That is equal to 7 x 7 x 2 = 98.
 
 ![](https://pengfeinie.github.io/images/yolo1_all_grid.gif)
+
+
+
+
+
+
+
+
+
+![这里写图片描述](E:\npfsourcecode\java\sourcecode\pengfeinie.github.io\images\yolo1_predict1.gif)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -259,3 +301,4 @@ Similar to deep learning–based approaches, you can choose to start with a pret
 - https://medium.com/oracledevs/final-layers-and-loss-functions-of-single-stage-detectors-part-1-4abbfa9aa71c
 - https://amrokamal-47691.medium.com/yolo-yolov2-and-yolov3-all-you-want-to-know-7e3e92dc4899
 - https://blog.csdn.net/hrsstudy/article/details/70305791?spm=1001.2014.3001.5501
+- https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088
