@@ -140,6 +140,20 @@ A brief definition for the Average Precision is the **area** under the **precisi
 
 *The PASCAL Visual Object Classes (VOC) 2012 dataset contains 20 object categories including vehicles, household, animals, and other: aeroplane, bicycle, boat, bus, car, motorbike, train, bottle, chair, dining table, potted plant, sofa, TV/monitor, bird, cat, cow, dog, horse, sheep, and person. Each image in this dataset has pixel-level segmentation annotations, bounding box annotations, and object class annotations. This dataset has been widely used as a benchmark for object detection, semantic segmentation, and classification tasks. The PASCAL VOC dataset is split into three subsets: 1,464 images for training, 1,449 images for validation and a private testing set.*
 
+For our discussion, we crop our original photo. YOLO divides the input image into an **S**×**S** grid. Each grid cell predicts only **one** object. For example, the yellow grid cell below tries to predict the “person” object whose center (the blue dot) falls inside the grid cell. Each grid cell detects only one object.
+
+![img](https://miro.medium.com/max/700/1*6qZXYCDUkC5Bc8nRolT0Mw.jpeg)
+
+Each grid cell predicts a fixed number of boundary boxes. In this example, the yellow grid cell makes two boundary box predictions (blue boxes) to locate where the person is. Each grid cell make a fixed number of boundary box guesses for the object.
+
+![img](https://miro.medium.com/max/667/1*4Y1PaY3ZgxKt5w84_0pNxw.jpeg)
+
+However, the one-object rule limits how close detected objects can be. For that, YOLO does have some limitations on how close objects can be. For the picture below, there are 9 Santas in the lower left corner but YOLO can detect 5 only. YOLO may miss objects that are too close.
+
+![img](https://miro.medium.com/max/700/1*j4PnWfxP3yoVPOFyI27tww.jpeg)
+
+
+
 For each grid cell,
 
 - it predicts **B** boundary boxes and each box has one **box confidence score**,
