@@ -174,6 +174,38 @@ The first five values encode the location and confidence of the first box, the n
 
 
 
+
+
+For every grid cell, you will get two bounding boxes, which will make up for the starting 10 values of the 1*30 tensor. The remaining 20 denote the number of classes. The values denote the class score, which is the conditional probability of object belongs to class i, if an object is present in the box.
+
+![](https://pengfeinie.github.io/images/yolov1_grid1.jpg)
+
+Next, we multiply all these class score with bounding box confidence and get class scores for different bounding boxes. We do this for all the grid cells. That is equal to 7 x 7 x 2 = 98.
+
+![](https://pengfeinie.github.io/images/yolo1.gif)
+
+
+
+![](https://pengfeinie.github.io/images/yolo1_grid.gif)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 The Yolo was one of the first deep, one-stage detectors and since the first paper was published in **CVPR 2016**, each year has brought with it a new Yolo paper or tech report. We begin with Yolo v1 [1], but since we are primarily interested in analyzing loss functions, all we really need to know about the Yolo v1 CNN **(Figure 2a)**, is that is takes an RGB image (**448×448×3**) and returns a cube (**7×7×30**), interpreted in **(Figure 2b)**.
 
 ![](https://pengfeinie.github.io/images/00adc0adec6423a45a0706a4ce2dc01d.png)
@@ -240,3 +272,4 @@ Similar to deep learning–based approaches, you can choose to start with a pret
 - https://www.harrysprojects.com/articles/yolov1.html
 - https://medium.com/oracledevs/final-layers-and-loss-functions-of-single-stage-detectors-part-1-4abbfa9aa71c
 - https://amrokamal-47691.medium.com/yolo-yolov2-and-yolov3-all-you-want-to-know-7e3e92dc4899
+- https://blog.csdn.net/hrsstudy/article/details/70305791?spm=1001.2014.3001.5501
