@@ -87,6 +87,24 @@ YOLO uses a single bounding box regression to predict the height, width, center,
 
 *The PASCAL Visual Object Classes (VOC) 2012 dataset contains 20 object categories including vehicles, household, animals, and other: aeroplane, bicycle, boat, bus, car, motorbike, train, bottle, chair, dining table, potted plant, sofa, TV/monitor, bird, cat, cow, dog, horse, sheep, and person. Each image in this dataset has pixel-level segmentation annotations, bounding box annotations, and object class annotations. This dataset has been widely used as a benchmark for object detection, semantic segmentation, and classification tasks. The PASCAL VOC dataset is split into three subsets: 1,464 images for training, 1,449 images for validation and a private testing set.*
 
+For each grid cell,
+
+- it predicts **B** boundary boxes and each box has one **bounding box confidence score**,
+- it detects **one** object only regardless of the number of boxes B,
+- it predicts **C** **conditional class probabilities** (one per class for the likeliness of the object class).
+
+To evaluate [PASCAL VOC](https://paperswithcode.com/dataset/pascal-voc), YOLO uses 7×7 grids (S×S), 2 boundary boxes (B) and 20 classes (C).
+
+Let’s get into more details. Each boundary box contains 5 elements: (*x, y, w, h*) and a **bounding box confidence score**. The confidence score reflects how likely the box contains an object (**objectness**) and how accurate is the boundary box. We normalize the bounding box width *w* and height *h* by the image width and height. *x* and *y* are offsets to the corresponding cell. Hence, *x, y, w* and *h* are all between 0 and 1. Each cell has 20 conditional class probabilities. The **conditional class probability** is the probability that the detected object belongs to a particular class (one probability per category for each cell). So, YOLO’s prediction has a shape of (S, S, B×5 + C) = (7, 7, 2×5 + 20) = (7, 7, 30).
+
+![img](https://pengfeinie.github.io/images/output_tensor.png)
+
+
+
+
+
+
+
 For our discussion, we crop our original photo. YOLO divides the input image into an **S**×**S** grid. Each grid cell predicts only **one** object. For example, the yellow grid cell below tries to predict the “person” object whose center (the blue dot) falls inside the grid cell. Each grid cell detects only one object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
 ![img](https://miro.medium.com/max/700/1*6qZXYCDUkC5Bc8nRolT0Mw.jpeg)
@@ -101,17 +119,9 @@ However, the one-object rule limits how close detected objects can be. For that,
 
 
 
-For each grid cell,
 
-- it predicts **B** boundary boxes and each box has one **box confidence score**,
-- it detects **one** object only regardless of the number of boxes B,
-- it predicts **C** **conditional class probabilities** (one per class for the likeliness of the object class).
 
-To evaluate [PASCAL VOC](https://paperswithcode.com/dataset/pascal-voc), YOLO uses 7×7 grids (S×S), 2 boundary boxes (B) and 20 classes (C).
 
-![img](https://miro.medium.com/max/700/1*OuMJUWo2rXYA-GYU63NUGw.jpeg)
-
-Let’s get into more details. Each boundary box contains 5 elements: (*x, y, w, h*) and a **box confidence score**. The confidence score reflects how likely the box contains an object (**objectness**) and how accurate is the boundary box. We normalize the bounding box width *w* and height *h* by the image width and height. *x* and *y* are offsets to the corresponding cell. Hence, *x, y, w* and *h* are all between 0 and 1. Each cell has 20 conditional class probabilities. The **conditional class probability** is the probability that the detected object belongs to a particular class (one probability per category for each cell). So, YOLO’s prediction has a shape of (S, S, B×5 + C) = (7, 7, 2×5 + 20) = (7, 7, 30).
 
 The **class confidence score** for each prediction box is computed as:
 
@@ -215,15 +225,7 @@ Download: https://pjreddie.com/media/files/yolov3.weights and move to under cfg 
 
 
 
-### SSD (Single Shot Multibox Detector)
 
-The [SSD architecture](https://arxiv.org/pdf/1512.02325.pdf) was published in 2016 by researchers from Google. It presents an object detection model using a single deep neural network combining regional proposals and feature extraction.
-
-A set of default boxes over different aspect ratios and scales is used and applied to the feature maps. As these feature maps are computed by passing an image through an image classification network, the feature extraction for the bounding boxes can be extracted in a single step. Scores are generated for each object category in every of the default bounding boxes. In order to better fit the ground truth boxes adjustment offsets are calculated for each box.
-
-![img](https://pengfeinie.github.io/images/1_DLdhpsy1CfhSp00AJNa4kg_uxhgv1.png)
-
-Different feature maps in the convolutional network correspond with different receptive fields and are used to naturally handle objects at different scales . As all the computation is encapsulated in a single network and fairly high computational speeds are achieved (for example, for 300 × 300 input 59 FPS).
 
 ## References
 
