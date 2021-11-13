@@ -75,9 +75,7 @@ We’ve got also one more predicted value pc which is a probability that there i
 
 YOLO uses a single bounding box regression to predict the height, width, center, and class of objects. In the image above, represents the probability of an object appearing in the bounding box.
 
-#### YOLO v1
-
-##### The Architecture
+## YOLO v1 The Architecture
 
 ![image-20211109160501058](https://pengfeinie.github.io/images/image-20211109160501058.png)
 
@@ -97,7 +95,17 @@ To evaluate [PASCAL VOC](https://paperswithcode.com/dataset/pascal-voc), YOLO us
 
 Let’s get into more details. Each boundary box contains 5 elements: (*x, y, w, h*) and a **bounding box confidence score**. The confidence score reflects how likely the box contains an object (**objectness**) and how accurate is the boundary box. We normalize the bounding box width *w* and height *h* by the image width and height. *x* and *y* are offsets to the corresponding cell. Hence, *x, y, w* and *h* are all between 0 and 1. Each cell has 20 conditional class probabilities. The **conditional class probability** is the probability that the detected object belongs to a particular class (one probability per category for each cell). So, YOLO’s prediction has a shape of (S, S, B×5 + C) = (7, 7, 2×5 + 20) = (7, 7, 30).
 
+In order to predict a single box, the network must output a number of things. Firstly it must encode the coordinates of the box which YOLO encodes as `(x, y, w, h)`, where `x` and `y` are the center of the box. Early I suggested you familiarise yourself with box parameterisation, because YOLO does output the actual coordinates of the box. Firstly, the width and height are normalised with respect to the image width, so if the network outputs a value of `1.0` for the width, it's saying the box should span the entire image, likewise `0.5` means it's half the width of the image. Note that the width and height have nothing to do with the actual grid cell itself. The `x and y` values *are* parameterised with respect to the grid cell, they represent offsets from the grid cell position. The grid cell has a width and height which is equal to `1/S` (we've normalised the image to have width and height 1.0). If the network outputs a value of `1.0` for `x`, then it's saying that the `x` value of the box is the `x` position of the grid cell plus the width of the grid cell.
+
+Secondly, YOLO also predicts a confidence score for each box which represents the probability that the box contains an object. Lastly, YOLO predicts a class, which is represented by a vector of `C` values, and the predicted class is the one with the highest value. Now, here's the catch. YOLO does *not* predict a class for every box, it predicts a class *for each cell*. But each cell is associated with two boxes, so those boxes will have the same predicted class, even though they may have different shapes and positions. 
+
 ![img](https://pengfeinie.github.io/images/output_tensor.png)
+
+## Training
+
+
+
+
 
 
 
