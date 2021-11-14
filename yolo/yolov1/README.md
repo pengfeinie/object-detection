@@ -117,6 +117,8 @@ So each cell is responsible for predicting boxes from a single part of the image
 
 https://araintelligence.com/blogs/deep-learning/object-detection/yolo_v1
 
+http://yann.lecun.com/exdb/lenet/
+
 
 
 
