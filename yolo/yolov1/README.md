@@ -115,7 +115,7 @@ So each cell is responsible for predicting boxes from a single part of the image
 
 ## Training
 
-
+https://araintelligence.com/blogs/deep-learning/object-detection/yolo_v1
 
 
 
@@ -131,7 +131,7 @@ For our discussion, we crop our original photo. YOLO divides the input image int
 
 Each grid cell predicts a fixed number of boundary boxes. In this example, the yellow grid cell makes two boundary box predictions (blue boxes) to locate where the person is. Each grid cell make a fixed number of boundary box guesses for the object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
-![img](https://miro.medium.com/max/667/1*4Y1PaY3ZgxKt5w84_0pNxw.jpeg)
+![img](E:\my\pengfeinie.github.io\images\box.jpeg)
 
 However, the one-object rule limits how close detected objects can be. For that, YOLO does have some limitations on how close objects can be. For the picture below, there are 9 Santas in the lower left corner but YOLO can detect 5 only. YOLO may miss objects that are too close.
 
