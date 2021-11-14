@@ -107,10 +107,6 @@ The first thing you might notice is that I've been calling it a fully connected 
 
 So why reshape it into 3D? What do all those outputs mean? Why do those outputs make it an object detector? I'll start with the reason that it's `7x7`. To clarify my notation and make it easier to talk about, I will refer to a *cell*, and what I mean by that is a single position in the `7x7` grid of the output tensor. Therefore each cell is a single vector of length 30, I have highlighted one such cell in the diagram.
 
-YOLO breaks the image up into a grid of size `7x7`. Let me copy in the image from the paper. For the moment, focus on the left part of the diagram, with the `SxS` grid.The images as below come from [YOLO v1 Paper](https://arxiv.org/abs/1506.02640).
-
-![image-20211109125322361](https://pengfeinie.github.io/images/image-20211109125322361.png)
-
 In order to predict a single box, the network must output a number of things. Firstly it must encode the coordinates of the box which YOLO encodes as `(x, y, w, h)`, where `x` and `y` are the center of the box. Early I suggested you familiarise yourself with box parameterisation, because YOLO does output the actual coordinates of the box. Firstly, the width and height are normalised with respect to the image width, so if the network outputs a value of `1.0` for the width, it's saying the box should span the entire image, likewise `0.5` means it's half the width of the image. Note that the width and height have nothing to do with the actual grid cell itself. The `x and y` values *are* parameterised with respect to the grid cell, they represent offsets from the grid cell position. The grid cell has a width and height which is equal to `1/S` (we've normalised the image to have width and height 1.0). If the network outputs a value of `1.0` for `x`, then it's saying that the `x` value of the box is the `x` position of the grid cell plus the width of the grid cell.
 
 Secondly, YOLO also predicts a confidence score for each box which represents the probability that the box contains an object. Lastly, YOLO predicts a class, which is represented by a vector of `C` values, and the predicted class is the one with the highest value. Now, here's the catch. YOLO does *not* predict a class for every box, it predicts a class *for each cell*. But each cell is associated with two boxes, so those boxes will have the same predicted class, even though they may have different shapes and positions. 
@@ -133,7 +129,7 @@ For our discussion, we crop our original photo. YOLO divides the input image int
 
 ![img](https://miro.medium.com/max/700/1*6qZXYCDUkC5Bc8nRolT0Mw.jpeg)
 
-Each grid cell predicts a fixed number of boundary boxes. In this example, the yellow grid cell makes two boundary box predictions (blue boxes) to locate where the person is. Each grid cell make a fixed number of boundary box guesses for the object.
+Each grid cell predicts a fixed number of boundary boxes. In this example, the yellow grid cell makes two boundary box predictions (blue boxes) to locate where the person is. Each grid cell make a fixed number of boundary box guesses for the object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
 ![img](https://miro.medium.com/max/667/1*4Y1PaY3ZgxKt5w84_0pNxw.jpeg)
 
@@ -156,24 +152,6 @@ It measures the confidence on both the classification and the **localization** (
 We may mix up those scoring and probability terms easily. Here are the mathematical definitions for your future reference.
 
 ![img](https://miro.medium.com/max/700/1*0IPktA65WxOBfP_ULQWcmw.png)
-
-
-
-
-
-
-
-
-
-![img](https://pengfeinie.github.io/images/output_tensor.png)
-
-
-
-![image-20211109125322361](https://pengfeinie.github.io/images/image-20211109125322361.png)
-
-
-
-
 
 
 
