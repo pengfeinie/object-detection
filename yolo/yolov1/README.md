@@ -141,9 +141,43 @@ This section explains how YOLO performs unified detection. Without a selective s
 
   ![](https://pengfeinie.github.io/images/xywh.bmp)
 
+### Using the PascalVOC dataset for object detection
 
+The [PascalVOC dataset](http://host.robots.ox.ac.uk/pascal/VOC/), is a dataset for object detection, classification and segmentation. The total size on disk is about 5.17GB for the 2007 and 2012 dataset, which makes it perfect for grokking the performance of the YOLOv1 algorithm.
+
+A sample image with its corresponding annotation file is shown below, the parts of the annotation file to observe have been highlighted in red.
+
+![Pascal VOC 2012 - 2007_000676 image](https://cdn.araintelligence.com/images/object-detection/2007_000676.jpg)
+
+![Pascal VOC 2012 - 2007_000676 XML Annotation](https://cdn.araintelligence.com/images/object-detection/2007_000676_annotation.png)
+
+The object class is denoted in 'annotation -> object -> name' tag, and this would be one of the 20 classes in the Pascal VOC dataset ("aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"). \ The bounding boxes are encoded in the top-left and bottom-right coordinates (min-max encoding), however, based on the YOLO algorithm, predictions are made with reference to the object centers (center encoding) and not their min-max coordinates. Therefore, we need to convert from the min-max encoding in the annotation file to the bounding box center encoding for use in the YOLO algorithm.
+
+**Converting from Bounding box min-max encoding to Bounding box center encoding**
+
+To make consequent calculations easier, we normalise the bounding box coordinates to values between 0 and 1 i.e b*∈[0,1]4×1. Let the bounding box coordinates in min-max encoding be defined as b{min-max} and the bounding box coordinates in center encoding be defined as b_{center}.
+
+Where W,H are the width and height of the image respectively, Converting from b_{min-max} to b_{center}can simply be defined as
 
 ![](https://pengfeinie.github.io/images/xywbcontert.bmp)
+
+This is easily implemented as:
+
+```python
+def convert(size, box):
+    W = size[0]
+    H = size[1]
+    x_min, x_max, y_min, y_max = box
+
+    x = (x_min + x_max)/2.0 * (1/W)
+    y = (y_min + y_max)/2.0 * (1/H)
+    w = (x_max - x_min) * (1/W)
+    h = (y_max - y_min) * (1/H)
+
+    return (x,y,w,h)
+```
+
+
 
 For our discussion, we crop our original photo. YOLO divides the input image into an **S**×**S** grid. Each grid cell predicts only **one** object. For example, the yellow grid cell below tries to predict the “person” object whose center (the blue dot) falls inside the grid cell. Each grid cell detects only one object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
