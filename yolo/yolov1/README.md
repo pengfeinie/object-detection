@@ -115,17 +115,21 @@ So each cell is responsible for predicting boxes from a single part of the image
 
 ## Training
 
-https://araintelligence.com/blogs/deep-learning/object-detection/yolo_v1
+This section explains how YOLO performs unified detection. Without a selective search algorithm to propose bounding boxes, YOLO divides the entire image into a grid and predicts bounding boxes at each grid cell. The predictions at each grid cell contains all the revelant information needed to localise and determine object classes in the image. This is explained in greater detail as a series of the following steps
 
-http://yann.lecun.com/exdb/lenet/
+- An object center is assigned to each object in a given image. This center is chosen by dividing the input image into an **S*×*S** grid. If the center of an object in the image falls into a particular grid cell then that grid cell is responsible for detecting that object. In the **448×448** image below, the image is divided into a **7×7** grid (S = 7). As there is only 1 object, a bird, in this image, the grid cell responsible for predicting the bird is the **(4,4)** grid cell. This was chosen based on the cross center of the bounding box drawn over the bird falling in that position. [source](https://araintelligence.com/blogs/deep-learning/object-detection/yolo_v1)
 
+  ![How Object Centers are assigned](https://cdn.araintelligence.com/images/object-detection/Grid_Description.png)
 
+- The CNN outputs a prediction tensor of the size  **S*×*S*×(*Bx5+C)** where S are the spatial dimensions, B is the number of bounding box predictions you want at each cell (the bounding box with the highest confidence is chosen for the final prediction), C is the number of classes in your dataset and 5 represents the bounding box coordinates along with the confidence of the classifier. The number of bounding boxes, B, you want at each cell can be arbitrary and more bounding boxes makes the model slightly more accurate but remember that increasing B also increases the computational and memory costs.
 
+- Each grid cell prediction contains B number of bounding boxes and C class predictions. A bounding box prediction consists of 5 elements: The x,y,w,h values of the bounding box and p, the probability that there is an object whose center falls within this grid cell (this is different from what is in C, which is the probability that the object belongs to a certain class). [source](https://araintelligence.com/blogs/deep-learning/object-detection/yolo_v1) The x,y coordinates of the bounding box are **predicted relative to the grid cell** and not the entire image but the width and height (w,h) are **predicted relative to the entire image**. Each grid cell also predicts the probability of the detected object belonging to a specific class class_i given that it is confident there is an object whose's center is in the grid cell and this information is all contained in C.
 
+  ![Grid Cell Description](https://cdn.araintelligence.com/images/object-detection/grid_cell.png)
 
+- For use later in loss calculations, the ground truth bounding box cordinates are all parameterised to be between 0 and 1. The width and height of the bounding box are calculated as a ratio of the entire image's width and height. The (x,y) grid cell offsets are parameterised as a ratio of a grid's width and height. For example, given the a 448×448 image and S = 7. By dividing the width/height by the grid size, we have a grid dimension where each grid cell is 64×64 pixels wide. Therefore a bounding box from our dataset with x = 32, y = 16, width = 300 and height = 150, would be parameterised as:
 
-
-
+  ![](https://pengfeinie.github.io/images/xywh.bmp)
 
 For our discussion, we crop our original photo. YOLO divides the input image into an **S**×**S** grid. Each grid cell predicts only **one** object. For example, the yellow grid cell below tries to predict the “person” object whose center (the blue dot) falls inside the grid cell. Each grid cell detects only one object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
@@ -133,7 +137,7 @@ For our discussion, we crop our original photo. YOLO divides the input image int
 
 Each grid cell predicts a fixed number of boundary boxes. In this example, the yellow grid cell makes two boundary box predictions (blue boxes) to locate where the person is. Each grid cell make a fixed number of boundary box guesses for the object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
-![img](E:\my\pengfeinie.github.io\images\box.jpeg)
+![img](https://pengfeinie.github.io/images/box.jpeg)
 
 However, the one-object rule limits how close detected objects can be. For that, YOLO does have some limitations on how close objects can be. For the picture below, there are 9 Santas in the lower left corner but YOLO can detect 5 only. YOLO may miss objects that are too close.
 
@@ -236,3 +240,5 @@ Download: https://pjreddie.com/media/files/yolov3.weights and move to under cfg 
 - https://amrokamal-47691.medium.com/yolo-yolov2-and-yolov3-all-you-want-to-know-7e3e92dc4899
 - https://blog.csdn.net/hrsstudy/article/details/70305791?spm=1001.2014.3001.5501
 - https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088
+- https://araintelligence.com/blogs/deep-learning/object-detection/yolo_v1
+- http://yann.lecun.com/exdb/lenet/
