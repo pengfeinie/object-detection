@@ -177,7 +177,19 @@ def convert(size, box):
     return (x,y,w,h)
 ```
 
+**Converting from center bounding box encoding to YOLO bounding box encoding**
 
+![image-20211117190423273](https://pengfeinie.github.io/images/image-20211117190423273.png)
+
+We currently have b_{center} which contains the x,y location of the object center and the width and height of the object, scaled between 0 and 1.
+
+To convert this to YOLO bounding box encoding (b_{yolo}) which takes the x,y location of the object center (relative to the image's width and height) and **converts it to an (x,y) coordinate relative to the grid cell** (fig 3). The width and height are left as they are in the YOLO encoding.
+
+This is formalised as
+
+![image-20211117190546310](https://pengfeinie.github.io/images/image-20211117190546310.png)
+
+During the loss calculations, the square root of the width, sqrt{w} and height, sqrt{h} are used as they ensure stability and prevent the loss function from penalising small width and height predictions.
 
 For our discussion, we crop our original photo. YOLO divides the input image into an **S**×**S** grid. Each grid cell predicts only **one** object. For example, the yellow grid cell below tries to predict the “person” object whose center (the blue dot) falls inside the grid cell. Each grid cell detects only one object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
