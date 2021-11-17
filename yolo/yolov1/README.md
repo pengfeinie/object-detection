@@ -141,6 +141,10 @@ This section explains how YOLO performs unified detection. Without a selective s
 
   ![](https://pengfeinie.github.io/images/xywh.bmp)
 
+
+
+![](https://pengfeinie.github.io/images/xywbcontert.bmp)
+
 For our discussion, we crop our original photo. YOLO divides the input image into an **S**×**S** grid. Each grid cell predicts only **one** object. For example, the yellow grid cell below tries to predict the “person” object whose center (the blue dot) falls inside the grid cell. Each grid cell detects only one object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
 ![img](https://miro.medium.com/max/700/1*6qZXYCDUkC5Bc8nRolT0Mw.jpeg)
