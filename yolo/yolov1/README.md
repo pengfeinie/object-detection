@@ -4,6 +4,16 @@ https://scholar.google.com/
 
 ![image-20211109124400546](https://pengfeinie.github.io/images/image-20211109124400546.png)
 
+
+
+https://www.youtube.com/watch?v=NM6lrxy0bxs
+
+https://www.bilibili.com/video/BV1Fb411n7LR/
+
+You Only Look Once: Unified, Real-Time Object Detection - CVPR 2016
+
+![](https://pengfeinie.github.io/images/2021-11-17_134927.jpg)
+
 Before diving into YOLO, we need to go through some terms:
 
 **1-Intersect Over Union (IOU):**
