@@ -195,11 +195,9 @@ I trained the model on the Pascal VOC 2007+2012 dataset. Here I've set the S*×*
 
 #### Bounding Box Selection Strategy
 
-The output prediction tensor from the YOLO model is of size S*∗*S*∗(*B*∗5+*C*). In this section, we still assume S=7,B=2 and C=20.![image-20211118132118780](C:\Users\Jack\AppData\Roaming\Typora\typora-user-images\image-20211118132118780.png)
+The output prediction tensor from the YOLO model is of size S*∗*S*∗(*B*∗5+*C*). In this section, we still assume S=7,B=2 and C=20.![image-20211118132118780](https://pengfeinie.github.io/images/image-20211118132118780.png)
 
-How do we decide which bounding box to use for the loss calculations at a particular cell? Let the two bounding boxes be represented as \hat{b_1}*b*1^ and \hat{b_2}*b*2^ and let the ground truth bounding box at that grid cell be b*b*. The bounding box chosen is simply the one that has the maximum intersection over union with the ground truth. i.e
-
-
+How do we decide which bounding box to use for the loss calculations at a particular cell? Let the two bounding boxes be represented as \hat{b1} and \hat{b2} and let the ground truth bounding box at that grid cell be b*b*. The bounding box chosen is simply the one that has the maximum intersection over union with the ground truth. i.e
 
 
 
