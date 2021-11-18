@@ -6,11 +6,7 @@ https://scholar.google.com/
 
 
 
-https://www.youtube.com/watch?v=NM6lrxy0bxs
-
-https://www.bilibili.com/video/BV1Fb411n7LR/
-
-You Only Look Once: Unified, Real-Time Object Detection - CVPR 2016
+[CVPR 2016 - YOLO v1 - You Only Look Once: Unified, Real-Time Object Detection](https://www.bilibili.com/video/BV1yP4y1G7n3/)
 
 ![](https://pengfeinie.github.io/images/2021-11-17_134927.jpg)
 
@@ -190,6 +186,24 @@ This is formalised as
 ![image-20211117190546310](https://pengfeinie.github.io/images/image-20211117190546310.png)
 
 During the loss calculations, the square root of the width, sqrt{w} and height, sqrt{h} are used as they ensure stability and prevent the loss function from penalising small width and height predictions.
+
+
+
+This section covers how I trained the YOLOv1 network, the missing pieces of the puzzle yet to be covered are how to choose the "best" bounding boxes amongst the ones predicted at each grid cell and the loss function used for training the network.
+
+I trained the model on the Pascal VOC 2007+2012 dataset. Here I've set the S*×*S*, spatial values to 7, which gives us a 7×7 grid. There are 20 classes in the VOC dataset and C = 20. Per the YOLO paper, we also set the number of bounding boxes per grid cell, B, to 2. Which means the predicted tensor from the CNN would be 7×7×30.
+
+#### Bounding Box Selection Strategy
+
+The output prediction tensor from the YOLO model is of size S*∗*S*∗(*B*∗5+*C*). In this section, we still assume S=7,B=2 and C=20.![image-20211118132118780](C:\Users\Jack\AppData\Roaming\Typora\typora-user-images\image-20211118132118780.png)
+
+How do we decide which bounding box to use for the loss calculations at a particular cell? Let the two bounding boxes be represented as \hat{b_1}*b*1^ and \hat{b_2}*b*2^ and let the ground truth bounding box at that grid cell be b*b*. The bounding box chosen is simply the one that has the maximum intersection over union with the ground truth. i.e
+
+
+
+
+
+
 
 For our discussion, we crop our original photo. YOLO divides the input image into an **S**×**S** grid. Each grid cell predicts only **one** object. For example, the yellow grid cell below tries to predict the “person” object whose center (the blue dot) falls inside the grid cell. Each grid cell detects only one object. [source](https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088)
 
