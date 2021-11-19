@@ -14,17 +14,7 @@ Before diving into YOLO, we need to go through some terms:
 
 **1-Intersect Over Union (IOU):**
 
-![img](https://pengfeinie.github.io/images/iou.png)
 
-*the above image from [source](https://amrokamal-47691.medium.com/yolo-yolov2-and-yolov3-all-you-want-to-know-7e3e92dc4899) .*
-
-IOU can be computed as Area of Intersection divided over Area of Union of two boxes, so IOU must be ≥0 and ≤1.
-
-When predicting bounding boxes, we need the find the IOU between the predicted bounding box and the ground truth box to be ~1.
-
-![img](https://pengfeinie.github.io/images/cat.jpeg)
-
-In the left image, IOU is very low, but in the right image, IOU is ~1.
 
 **2-** **Precision:**
 
@@ -198,6 +188,28 @@ I trained the model on the Pascal VOC 2007+2012 dataset. Here I've set the S*×*
 The output prediction tensor from the YOLO model is of size S*∗*S*∗(*B*∗5+*C*). In this section, we still assume S=7,B=2 and C=20.![image-20211118132118780](https://pengfeinie.github.io/images/image-20211118132118780.png)
 
 How do we decide which bounding box to use for the loss calculations at a particular cell? Let the two bounding boxes be represented as \hat{b1} and \hat{b2} and let the ground truth bounding box at that grid cell be b*b*. The bounding box chosen is simply the one that has the maximum intersection over union with the ground truth. i.e
+
+![image-20211118134213789](E:\npfsourcecode\java\sourcecode\pengfeinie.github.io\images\image-20211118134213789.png)
+
+#### Intersection over Union (IoU)
+
+IOU can be computed as Area of Intersection divided over Area of Union of two boxes, so IOU must be ≥0 and ≤1.![img](https://pengfeinie.github.io/images/iou.png)
+
+*the above image from [source](https://amrokamal-47691.medium.com/yolo-yolov2-and-yolov3-all-you-want-to-know-7e3e92dc4899) .* When predicting bounding boxes, we need the find the IOU between the predicted bounding box and the ground truth box to be ~1.
+
+![img](https://pengfeinie.github.io/images/cat.jpeg)
+
+In the left image, IOU is very low, but in the right image, IOU is ~1.
+
+This is also known as the Jacquard Index and it is simply a measure of how similar the predicted bounding box is to the ground truth bounding box.
+
+This function is very important and it plays a HUGE role in our accurate our model is. In the context of the YOLO algorithm, it is what we use to select the best predicted bounding for use in loss calculations.
+
+![IoU illustration](https://pengfeinie.github.io/images/iou1.jpg)
+
+Using the diagram above, the IoU is simply the blue region as this is the area common to the green bounding box, A (ground truth) and the red bounding box, B (prediction). To give this a formal definition, it is the ratio of the area common to both boxes (blue region) to the total area of both bounding boxes.
+
+Let the green and red bounding boxes be A, B respectively. Then their top-left and bottom right coordinates are defined as
 
 
 
