@@ -367,4 +367,13 @@ Similar to deep learning–based approaches, you can choose to start with a pret
 - https://jonathan-hui.medium.com/real-time-object-detection-with-yolo-yolov2-28b1b93e2088
 - https://docs.ultralytics.com/
 - https://github.com/ultralytics/yolov3
+- https://www.mathworks.com/discovery/object-detection.html
+- https://cocodataset.org/#download
+- https://developpaper.com/introduction-to-the-principle-of-yolo-target-detection-model/
+- https://www.kdnuggets.com/2018/05/implement-yolo-v3-object-detector-pytorch-part-1.html
+- https://medium.com/oracledevs/final-layers-and-loss-functions-of-single-stage-detectors-part-1-4abbfa9aa71c
+- https://www.harrysprojects.com/articles/yolov1.html
+- https://developpaper.com/introduction-to-the-principle-of-yolo-target-detection-model/
+- https://amrokamal-47691.medium.com/yolo-yolov2-and-yolov3-all-you-want-to-know-7e3e92dc4899
+- https://medium.com/hackernoon/understanding-yolo-f5a74bbc7967
 
